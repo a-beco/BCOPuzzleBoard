@@ -63,26 +63,44 @@ static const NSTimeInterval kTransparentDuration    = 0.3;  // ターン終了�
     NSUInteger _numberOfRows, _numberOfColumns;
 }
 
+- (id)initWithFrame:(CGRect)frame
+{
+    self = [super initWithFrame:frame];
+    if (self) {
+        [self initialize];
+        self.backgroundColor = [UIColor colorWithRed:89 / 255.0
+                                               green:70 / 255.0
+                                                blue:56 / 255.0
+                                               alpha:1.0];
+    }
+    return self;
+}
+
 - (id)initWithCoder:(NSCoder *)aDecoder
 {
     self = [super initWithCoder:aDecoder];
     if (self) {
-        // touch timer deafult
-        _enableTouchTimer       = YES;
-        _touchTimeLimitSec      = 4.0;
-        _timerGaugeIsShownSec   = 2.0;
-        
-        // animation queues
-        _swapAnimationQueue     = [[BCOEventQueue alloc] init];
-        _vanishAnimationQueue   = [[BCOEventQueue alloc] init];
-        
-        // delegateで渡すデータを作る
-        _vanishedStoneInfos = @[].mutableCopy;
-        
-        self.state = BCOPuzzleBoardStateWaiting;
-        self.exclusiveTouch = YES;
+        [self initialize];
     }
     return self;
+}
+
+- (void)initialize
+{
+    // touch timer deafult
+    _enableTouchTimer       = YES;
+    _touchTimeLimitSec      = 4.0;
+    _timerGaugeIsShownSec   = 2.0;
+    
+    // animation queues
+    _swapAnimationQueue     = [[BCOEventQueue alloc] init];
+    _vanishAnimationQueue   = [[BCOEventQueue alloc] init];
+    
+    // delegateで渡すデータを作る
+    _vanishedStoneInfos = @[].mutableCopy;
+    
+    self.state = BCOPuzzleBoardStateWaiting;
+    self.exclusiveTouch = YES;
 }
 
 - (void)dealloc
