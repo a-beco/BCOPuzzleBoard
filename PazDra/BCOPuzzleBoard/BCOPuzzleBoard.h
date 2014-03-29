@@ -70,11 +70,8 @@ typedef NS_ENUM(NSUInteger, BCOPuzzleBoardState) {
 //===============================
 @interface BCOVanishedStoneInfo : NSObject
 
-@property (nonatomic) BCOStoneType type;
-@property (nonatomic) NSUInteger numberOfStones;
-
-+ (BCOVanishedStoneInfo *)vanishedStoneInfoWithType:(BCOStoneType)type
-                                     numberOfStones:(NSUInteger)numberOfStones;
+@property (nonatomic, readonly) BCOStoneType type;
+@property (nonatomic, readonly) NSUInteger numberOfStones;
 
 @end
 

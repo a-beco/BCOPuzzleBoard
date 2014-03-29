@@ -21,12 +21,29 @@
 #import "BCOTimer.h"
 #import "BCOTimerGauge.h"
 
+
 // animation duration constants
 static const NSTimeInterval kSwapDuration           = 0.1;  // 石を入れ替える時間
 static const NSTimeInterval kMoveDuration           = 0.1;  // タッチ中の石が指の位置に移動するまでの時間
 static const NSTimeInterval kVanishDuration         = 0.3;  // 石が消えるのにかかる時間
 static const NSTimeInterval kFallDuration           = 0.4;  // 石が落ちるのにかかる時間
 static const NSTimeInterval kTransparentDuration    = 0.3;  // ターン終了時に石が半透明になるのにかかる時間
+
+
+//===============================
+// 消した石の情報
+//===============================
+
+@interface BCOVanishedStoneInfo ()
+
+@property (nonatomic, readwrite) BCOStoneType type;
+@property (nonatomic, readwrite) NSUInteger numberOfStones;
+
+@end
+
+@implementation BCOVanishedStoneInfo
+@end
+
 
 //===============================
 // メインのパズル盤
@@ -424,7 +441,9 @@ static const NSTimeInterval kTransparentDuration    = 0.3;  // ターン終了�
 {
     BCOStonePosition position = [positions[0] positionValue];
     BCOStoneView *stoneView = [self p_stoneViewAtPosition:position];
-    BCOVanishedStoneInfo *vanishedStoneInfo = [BCOVanishedStoneInfo vanishedStoneInfoWithType:stoneView.type numberOfStones:[positions count]];
+    BCOVanishedStoneInfo *vanishedStoneInfo = [[BCOVanishedStoneInfo alloc] init];
+    vanishedStoneInfo.type             = stoneView.type;
+    vanishedStoneInfo.numberOfStones   = [positions count];
     return vanishedStoneInfo;
 }
 
@@ -747,23 +766,6 @@ static const NSTimeInterval kTransparentDuration    = 0.3;  // ターン終了�
     
     // 石を消す
     [self p_vanishStonesAnimated:YES];
-}
-
-@end
-
-
-//===============================
-// 消した石の情報
-//===============================
-@implementation BCOVanishedStoneInfo
-
-+ (BCOVanishedStoneInfo *)vanishedStoneInfoWithType:(BCOStoneType)type
-                                     numberOfStones:(NSUInteger)numberOfStones
-{
-    BCOVanishedStoneInfo *vanishedStoneInfo = [[BCOVanishedStoneInfo alloc] init];
-    vanishedStoneInfo.type              = type;
-    vanishedStoneInfo.numberOfStones    = numberOfStones;
-    return vanishedStoneInfo;
 }
 
 @end
