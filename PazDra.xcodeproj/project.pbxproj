@@ -164,8 +164,7 @@
 				8E874F3C1863905700A24AA9 /* BCOCollisionUtils.h */,
 				8E874F3A1863902E00A24AA9 /* BCOCollisionUtils.m */,
 			);
-			name = C;
-			path = BCOPuzzleBoard/C;
+			path = C;
 			sourceTree = "<group>";
 		};
 		8E008334188BC2E1003BB744 /* Animation */ = {
