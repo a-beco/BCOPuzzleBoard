@@ -8,8 +8,8 @@ BCOPuzzleBoard
 BCOPuzzleBoard.h を import し、以下のようなコードを書くことで画面上の任意の位置に任意のサイズで貼付けられます。
 
     BCOPuzzleBoard *puzzle = [[BCOPuzzleBoard alloc] initWithFrame:CGRectMake(0, 0, 320, 0)];
-    [puzzle setupBoardWithNumberOfRows:kBCONumberOfRows
-                       numberOfColumns:kBCONumberOfColumns];
+    [puzzle setupBoardWithNumberOfRows:5
+                       numberOfColumns:6];
     [puzzle sizeToFit];
     puzzle.delegate = self;
     [self.view addSubview:puzzle];
